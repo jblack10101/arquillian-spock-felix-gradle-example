@@ -1,0 +1,1 @@
+This project attempts to get the source from https://github.com/arquillian/arquillian-testrunner-spock/tree/master/examples/groovy-2.x to work using Felix and Gradle.
