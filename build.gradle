@@ -1,0 +1,46 @@
+apply plugin: 'java'
+apply plugin: 'osgi'
+apply plugin: 'idea'
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+    maven { url "http://repository.jboss.org/nexus/content/groups/public" }
+//    maven { url "https://repository.jboss.org/nexus/content/repositories/releases" }
+//    maven { url "https://repository.jboss.org/nexus/content/repositories/thirdparty-releases" }
+//    maven { url "https://repository.jboss.org/nexus/content/repositories/snapshots" }
+}
+
+configurations {
+    provided
+}
+
+sourceSets {
+    main.compileClasspath += configurations.provided
+    test.compileClasspath += configurations.provided
+    test.runtimeClasspath += configurations.provided
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.8.1'
+    testCompile group: 'org.jboss.arquillian', name: 'arquillian-junit', version: '1.0.0.Alpha4'
+
+    provided 'org.osgi:org.osgi.core:5.0.0'
+    provided 'org.osgi:org.osgi.compendium:4.3.1'
+
+    testCompile group: 'org.spockframework', name: 'spock-core', version:'0.7-groovy-2.0'
+    testCompile group: 'org.codehaus.groovy', name: 'groovy-all', version:'2.2.2'
+
+    testCompile group: 'org.jboss.arquillian.spock', name: 'arquillian-spock-container', version:'1.0.0.Beta3'
+    testCompile group: 'org.jboss.arquillian.protocol', name: 'arquillian-protocol-servlet', version:'1.0.3.Final'
+    testCompile 'javax.inject:javax.inject:1'
+
+    testCompile 'org.jboss.arquillian.container:arquillian-osgi-felix:2.0.0.Final'
+    testCompile group: 'org.jboss.osgi.felix', name: 'jboss-osgi-felix', version: '3.0.4'
+    testCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.5.8'
+    testCompile group: 'log4j', name: 'log4j', version: '1.2.14'
+}
